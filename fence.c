@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <ctype.h>
 
 int main(void) {
 	char name[30], ch;
@@ -18,17 +17,22 @@ int main(void) {
 	}
 	i--;
 
-	printf("请输入每行的个数：");
-	scanf_s("%d", &col);
-	if (col > i) {
-		printf("请输入正确的行数：");
-		scanf_s("%d", &col);
+	printf("请输入栏数：");
+	scanf_s("%d", &row);
+	while (row > i) {
+		printf("请输入正确的栏数：");
+		scanf_s("%d", &row);
 	}
 
-	row = i / col;
+	col = i / row;
+	add = i % row;
 
-	for (j = 0; j <= row; j++) {
+	for (j = 0; j <= col; j++) {
 		for (k = 1; k <= i; k += col) {
+			if (k <= add * col + add && k > 1)
+				k++;
+			if (j == col && (j + k) == (add + 1) * (col + 1))
+				break;
 			printf("%c", name[j + k]);
 		}
 	}
